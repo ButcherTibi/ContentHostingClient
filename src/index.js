@@ -28,8 +28,8 @@ function serverFetch(relative_url, data = null) {
   }
   // remote
   else {
-    server_url = "https://contenthostingserver.herokuapp.com:80/" + relative_url;
-    client_url = "https://contenthostingclient.herokuapp.com:80/";
+    server_url = "https://contenthostingserver.herokuapp.com:443/" + relative_url;
+    client_url = "https://contenthostingclient.herokuapp.com:443/";
   }
 
   let headers = new Headers();
