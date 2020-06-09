@@ -28,6 +28,9 @@ function serverFetch(relative_url, data = null) {
   }
   // load from config vars
   else {
+
+    console.log(process.env);
+
     server_url = process.env.SERVER_URL + relative_url;
     client_url = process.env.CLIENT_URL;
   }
