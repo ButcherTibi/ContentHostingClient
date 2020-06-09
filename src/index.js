@@ -21,18 +21,15 @@ function serverFetch(relative_url, data = null) {
   let server_url;
   let client_url;
 
-  // load from .env file
+  // local
   if (process.env.NODE_ENV === "development") {
     server_url = "http://localhost:3001/" + relative_url;
     client_url = "http://localhost:3000/";
   }
-  // load from config vars
+  // remote
   else {
-
-    console.log(process.env);
-
-    server_url = process.env.SERVER_URL + relative_url;
-    client_url = process.env.CLIENT_URL;
+    server_url = "https://contenthostingserver.herokuapp.com:80/" + relative_url;
+    client_url = "https://contenthostingclient.herokuapp.com:80/";
   }
 
   let headers = new Headers();
