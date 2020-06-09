@@ -22,7 +22,7 @@ function serverFetch(relative_url, data = null) {
   let client_url;
 
   // local
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
     server_url = "http://localhost:3001/" + relative_url;
     client_url = "http://localhost:3000/";
   }
