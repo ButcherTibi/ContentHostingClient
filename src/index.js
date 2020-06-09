@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';  // delete
 import * as serviceWorker from './serviceWorker';
 
 // Required Assets
@@ -17,10 +16,24 @@ var account_password = "";
 
 /** @param {RequestInfo} url
  *  @param {string} send_data */
-function serverFetch(url, data = null) {
+function serverFetch(relative_url, data = null) {
+
+  let server_url;
+  let client_url;
+
+  // load from .env file
+  if (process.env.NODE_ENV === "development") {
+    server_url = "http://localhost:3001/" + relative_url;
+    client_url = "http://localhost:3000/";
+  }
+  // load from config vars
+  else {
+    server_url = process.env.SERVER_URL + relative_url;
+    client_url = process.env.CLIENT_URL;
+  }
 
   let headers = new Headers();
-  headers.set("Origin", "http://localhost:3000");
+  headers.set("Origin", client_url);
   headers.set("Content-Type", "application/json");
   headers.set("Access-Control-Request-Method", "POST");
   headers.set("Access-Control-Request-Headers", "Origin, Content-Type, Accept");
@@ -30,7 +43,7 @@ function serverFetch(url, data = null) {
     req_body = JSON.stringify(data);
   }
 
-  let req = new Request(url, {
+  let req = new Request(server_url, {
     method: "POST",
     mode: "cors",
     headers: headers,
@@ -70,7 +83,7 @@ class HomeThreads extends React.Component {
   }
 
   loadThreadCards() {
-    serverFetch("http://localhost:3001/getHomeThreadCards").then(
+    serverFetch("getHomeThreadCards").then(
       res => {
         if (res.err === "") {
           this.setState({
