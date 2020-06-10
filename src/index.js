@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import * as serviceWorker from './serviceWorker';
 
 // Required Assets
 import site_logo_img from "./assets/site_logo.jpg"
